@@ -88,13 +88,60 @@ void choosedata(){
 		}
 		printf("\n");
 }
-void transhex(){
-
+//进制转换
+//输入10进制数
+//输入要转换的进制
+static void base_convert(){
+		int number,base,i=0;
+		int n[128];
+		printf("进制转换");
+		printf("Please enter the converted number:");
+		scanf("%d",&number);
+		printf("Please enter the base:");
+		scanf("%d",&base);
+		do{
+			n[i]=number%base;
+			number=number/base;
+			i++;
+		}while(number != 0);
+		for(i--;i>=0;i--){
+				if(n[i]>=10)
+						printf("%c",n[i]-10+'A');
+				else
+						printf("%d",n[i]);
+		}
+		printf("\n");
 }
 
+
+//删除法求质数 1000内
+//建立1001长的数组 使数字刚好对应下表 ：i[2]=2
+//从i=2开始将i的整数倍做非质数标记 列入 4 6 8 每次加i 都做标记
+//循环打印输出，将非标记的下表循环输出该下表就是质数
+static void primer(){
+		int i,j;
+		//数组内初始化0
+		char primer[1001]={0};
+		for(i=2;i<1001;i++){
+				if(primer[i] == 0)
+				//将i的倍数做标记
+				for(j=i*2;j<1001;j+=i){
+						primer[j]=-1;
+				}
+			}
+		
+		for(i=2;i<1001;i++){
+				//如果没有标记就说明当前下表是质数 输出下标志
+				if(primer[i]==0)
+					printf("%d ",i);
+		}
+		printf("\n");
+}
 void main(){
-		fibonacci();
-		listdata();
-		choosedata();
+		//fibonacci();
+		//listdata();
+		//choosedata();
+		//base_convert();
+		primer();
 		exit(0);
 }
