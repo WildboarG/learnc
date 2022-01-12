@@ -66,8 +66,8 @@ static void clv(void){
 //矩阵乘积
 static void mul(){
 		int a[M][N]={1,2,3,4,5,6};
-		int b[n][m]={1,0,0,1,1,0};
-		int c[M][K];
+		int b[N][M]={1,0,0,1,1,0};
+		int c[M][K]={0};
 		int i,j,k;
 		for(i=0;i<M;i++){
 				for(j=0;j<K;j++){
@@ -75,11 +75,18 @@ static void mul(){
 								c[i][j] += a[i][k] * b[k][j];
 						}
 				}
+				for(i=0;i<M;i++){
+						for(j=0;j<K;j++){
+								printf("%d ",c[i][j]);
+						}
+						printf("\n");
+				}
 		}
 }
 int main(){
 	    //change();
 		//max();
 		clv();
+		mul();
 		exit(0);
 }
