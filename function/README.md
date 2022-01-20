@@ -110,7 +110,24 @@ arch@root:
       }
       ```
 
-      
+* 函数与字符数组
+
+  * 字符在函数中的传入
+
+    ```c
+    char str[]="helloworld"
+    //实参传入
+    func_str(str);
+    //形参接收
+    func(char *p){
+        return;
+    }
+    
+    ```
+
+  * 参考字符数组拷贝 `strcpy` `strncpy`
+
+    
 
 
  ## 5. 函数与指针
