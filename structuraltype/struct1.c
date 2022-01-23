@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <sys/cdefs.h>
 #define NAMESIZE 32
+/*
+//匿名结构体(无头结构体) 在定义时候直接赋值
+struct{
+		int i;
+		char ch;
+		float f;
+}a={,,},b={,,},c={,,},*q,*p;
+*/
 struct simple_st{
 	int i;
 	float f;
