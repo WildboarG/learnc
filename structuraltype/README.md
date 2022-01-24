@@ -77,15 +77,52 @@
 
 7. 位域：
 
+      ```c
+      #include <stdio.h>
+      #include <stdlib.h>
+      union {
+          struct{
+              char a:1;//1bit
+              char b:2;//2bit
+              char c:1;//1bit
+          }st;
+          char y;    //1  8bit
+      }w;
+      int main(){
+          w.y=1;    // 0 0 0 0 0 0 0 1
+          printf("%d",sizeof(w));  //1字节
+          exit(0);
+      }
+      ```
+
+      
+
 ## 枚举
 
 - 描述
 
 ```c
+#include <stdio.h>
+#include <stdlib.h>
 enum 标识符{
   	成员1;
     成员2;
     ...
 };
+
+enum day{
+        MON,  //0
+        TUS,  //1
+        THS,  //2
+        WES,  //3
+        FRI=2,  //2
+        SAT,  //3
+        SUN   //4
+};
+int main(){
+        enum day a=SUN;
+        printf("%d\n",a);
+        exit(0);
+}
 ```
 
