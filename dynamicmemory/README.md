@@ -22,3 +22,13 @@ void *realloc(void *ptr,size_t size);
 ### 原则：
 
 ​		谁申请谁释放
+
+
+
+## `typedefine`
+
+---
+
+> 为已有的数据类型改名
+>
+> typedefine  已有的数据类型 新名字；
