@@ -27,7 +27,5 @@ int main(){
 		p = func(p, num);//申请完内存的地址被返回，可以手动释放掉
 		free(p);
 
-	
-
 		exit(0);
 }

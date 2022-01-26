@@ -9,9 +9,12 @@ int main(){
 				printf("malloc( error!\n)");
 				exit(1);
 		}
-		*p = 65536;
-		printf("%d\n",*p);
-		free(p);
-
+		*p = 655;
+		printf("%p---->%d\n",&p,*p);
+		free(p);// 释放掉内存但是指针还有可能指在这里但为野指针
+		
+		p = NULL;  //手动拉空
+		*p = 123;
+		printf("%p---->%d\n",&p,*p);
  		exit(0);
 }
