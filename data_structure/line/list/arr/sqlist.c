@@ -4,12 +4,13 @@
 
 sqlist *sqlist_create(){
 		sqlist *me;
+		//printf("%d",sizeof(*me));  //1024*4+4=4100
 		me = malloc(sizeof(*me));
 		if(me==NULL){
 				return NULL;
 		}
-		me->last=-1;
-		return me;
+		me->last=-1; //申请内存成功 将计数器置为-1
+		return me;  //返回结构体指针 
 }
 void sqlist_create1(sqlist **ptr){
 		*ptr = malloc(sizeof(**ptr));
@@ -21,26 +22,26 @@ void sqlist_create1(sqlist **ptr){
 }
 int sqlist_insert(sqlist *me,int i,datatype *data){
 		int j;
-		if(me->last==DATASIZE-1){
+		if(me->last==DATASIZE-1){   //若溢出
 				return -1;
 		}
-		if(i<0 || i >me->last+1){
+		if(i<0 || i >me->last+1){  //若插入位置不在空间内
 				return -2;
 		}
-		for(j=me->last;i<=j;j--){
+		for(j=me->last;i<=j;j--){   // 
 		me->data[j+1] = me->data[j];
 		}	
 		me->data[i] = *data;
 		me->last++;
 		return 0;
-}  //增加数据，特定位置，要插入数据的变量地址  ，返回值指针
+}  //增加数据，特定位置，要插入数据的变量地址  ，返回状态
 int sqlist_delete(sqlist *me,const int i){
  		int j;
-		if(i <0 ||i >me->last){
+		if(i <0 ||i >me->last){ //若要不在空间内
 				return -1;
 		}
 		//i+1  last
-		for(j=i+1;j<=me->last;j++){
+		for(j=i+1;j<=me->last;j++){  
 				me->data[j-1]=me->data[j];
 		}
 		me->last--;
@@ -49,10 +50,10 @@ int sqlist_delete(sqlist *me,const int i){
 }  //删除数据
 int sqlist_find(sqlist *me,datatype *data){
 		int i;
-		if(sqlist_isempty(me) ==0){
+		if(sqlist_isempty(me) ==0){  //若表为空
 				return -1;
 		}
-		for(i=0;i<me->last;i++){
+		for(i=0;i<me->last;i++){     //
 				if(me->data[i]== *data){
 						return i;
 				}
@@ -64,7 +65,7 @@ int sqlist_isempty(sqlist *me){
 	if(me->last == -1){
 			return 0;
 	}
-	return -1;
+	return -1;   //不为空返回-1
 } //线性表是否为空 返回状态
 int sqlist_setempty(sqlist *me){
 	me->last = -1;
@@ -89,8 +90,8 @@ int sqlist_destory(sqlist *me){
 		return 0;
 }  //销毁表 返回状态
 int sqlist_union(sqlist *dest,sqlist *src){
-	//list1 -> 12 23 34 45 56
-	//list2 -> 67 78 89 23 10
+	//dest -> 12 23 34 45 56
+	//src  -> 67 78 89 23 10
 	 int i;
 	 for (i=0;i<=src->last;i++)
 		if (sqlist_find(dest,&src->data[i]) < 0){

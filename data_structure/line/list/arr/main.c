@@ -41,8 +41,10 @@ int main(){
 		}
 		printf("list1：");
 		sqlist_display(list1);
-		//sqlist_delete(list,1);
-		//sqlist_display(list);
+		//删除表一的 1
+		printf("删除表一的1后：");
+		sqlist_delete(list,1);
+		sqlist_display(list);
 		
 		sqlist_union(list,list1);
 		printf("合并后：");
