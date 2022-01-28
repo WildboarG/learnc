@@ -14,6 +14,8 @@ int list_order_insert(list *,datatype *);
 int list_delete_at(list *,int i,datatype *);
 int list_delete(list *,datatype *);
 
+int list_find(list *,int i);
+
 int list_isempty(list *);
 void list_display(list *);
 void list_destroy(list *);

@@ -41,13 +41,75 @@ int list_insert_at(list *me, int i, datatype *data){
 	
 }
 int list_order_insert(list *me,datatype *data){
-
+		list *p=me, *q;
+		while(p->next && p->next->data < *data){
+				p = p->next;
+		}
+		q =malloc(sizeof(*q));
+		if(q==NULL){
+				return -1;
+		}
+		else{
+				q->data =*data;
+				q->next = p->next;
+				p->next = q;
+				return 0;
+		}
+			
 }
 int list_delete_at(list *me,int i,datatype *data){
+		int j=0;
+		list *p =me,*q;
+		*data = -1;
+		if(i<0){
+				return -1;
+		}
+		while(j<i && p){
+				p = p->next;
+				j++;
+		}
+		if(p){
+			q = p->next;
+			p->next = q->next;
+			*data = q->data;
+			free(q);
+			q=NULL;
+			return 0;
+		}
+		else{
+				return -2;
+		}
+}
+
+int list_delete(list *me,datatype *data){
+		list *p=me ,*q;
+		while(p->next && p->next->data != *data){
+				p = p->next;
+		}
+		if(p->next ==NULL){
+				return -1;
+		}
+		else{
+				q = p->next;
+				p->next = q->next;
+		}
 
 }
-int list_delete(list *me,datatype *data){
 
+int list_find(list *me, int i){
+		int j,value;
+		list *q=me->next;
+		if(i<0){
+				return -1;
+		}
+		for(j=0;j<i;j++){
+				if(me->next == NULL){
+						return -2;
+				}
+				value=q->data;
+				q=q->next;
+		}
+		return value;
 }
 int list_isempty(list *me){
 	if(me->next==NULL){

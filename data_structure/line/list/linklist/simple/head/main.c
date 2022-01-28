@@ -5,20 +5,37 @@
 
 int main(){
 		list *l;
-		int i;
-		datatype arr[]={12,23,34,45};
+		int i,err;
+		datatype arr[]={12,2,23,9,34,6,45};
 		l =list_create();
 		if(l==NULL){
 				exit(1);
 		}
 	//	printf("%d",__LINE__);
 		for(i=0;i<sizeof(arr)/sizeof(*arr);i++){
-			if(list_insert_at(l,0,&arr[i])){
+			if(list_order_insert(l,&arr[i])){
 					exit(1);
 			}
 		}
 	//	printf("%d",__LINE__);
 		list_display(l);
+#if 0
+		int value=34;
+		list_delete(l,&value);
+		list_display(l);
+#endif	
+		datatype value;
+		err = list_delete_at(l, 2,&value);
+		if(err){
+				exit(1);
+		}
+		list_display(l);
+		printf("delete :%d\n",value);
+		int num=6;
+		value = list_find(l,num);	
+		printf("find number %d :%d\n",num,value);
+		
+		
 		list_destroy(l);
 
 
