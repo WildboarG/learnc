@@ -4,7 +4,7 @@
 
 
 int main(){
-		list *l;    //定义一个链表类型
+		list *l;    //定义一个链表类型的指针
 		int i,err;
 		datatype arr[]={12,2,23,9,34,6,45};
 		l =list_create(); //创建一个链表 指向表头
@@ -13,7 +13,7 @@ int main(){
 		}
 	//	printf("%d",__LINE__);
 		for(i=0;i<sizeof(arr)/sizeof(*arr);i++){  //将数组循环写入链表
-			if(list_order_insert(l,&arr[i])){
+			if(list_order_insert(l,&arr[i])){    //由于数据的传递依靠指针 所以取地值
 					exit(1);
 			}
 		}

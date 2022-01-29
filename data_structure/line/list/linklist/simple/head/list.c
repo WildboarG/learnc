@@ -10,7 +10,7 @@ list *list_create(){   //创建链表将表头返回
 	if (me ==NULL){
 			return NULL;
 	}
-	me->next = NULL;   //若申请成功将下一块地址先置空，防止野指针
+	me->next = NULL;   //若申请成功将下一块地址(后继)先置空，防止野指针
 	return me;    //返回头
 }
 //按顺序插入
@@ -54,8 +54,8 @@ int list_order_insert(list *me,datatype *data){
 		}
 		else{
 				q->data =*data ;  //存放要插入的值
-				q->next = p->next; // p的后驱 给到q的后驱
-				p->next = q;      // q的地址给到p的后驱
+				q->next = p->next; // p的后继 给到q的后继
+				p->next = q;      // q的地址给到p的后继
 				return 0;        // 完成插入
 		}
 			
@@ -64,7 +64,7 @@ int list_order_insert(list *me,datatype *data){
 int list_delete_at(list *me,int i,datatype *data){
 		int j=0;
 		list *p =me,*q;
-		*data = -1;      //先给要带回去值的空间置-1;
+		*data = -1;      //先给要带回去值的空间置-1;如果不存在就把-1带回去
 		if(i<0){
 				return -1;
 		}
@@ -73,7 +73,7 @@ int list_delete_at(list *me,int i,datatype *data){
 				j++;   //p指向借助循环找到要删除值的位置
 		}
 		if(p){
-			q = p->next;  //p的后驱动给到q
+			q = p->next;  //p的后继动给到q
 			p->next = q->next; // q为当前要删除的值，把q的后驱给q的后驱
 			*data = q->data;  //把q的值带出
 			free(q);        //释放掉q
