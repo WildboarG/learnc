@@ -39,7 +39,39 @@ void poly_show(struct node_st *me){
 		printf("\n");
 }
 		
-
+void poly_union(struct node_st *dest,struct node_st *res){
+		struct node_st *p ,*q,*r;
+		p = dest->next;
+		q = res->next;
+		r = dest;
+		while(p && q){
+				if(p->exp < q->exp ){
+						r->next = p;
+						r = p;
+						p = p->next;
+				}
+				else if(p->exp > q->exp){
+						r->next = q;
+						r =q ;
+						q =q->next;
+				}
+				else{ // p->exp == q->exp
+						p->coef += q->coef;
+						if(p->coef){
+								r->next = p;
+								r = p;
+						}
+						p = p->next;
+						q = q->next;
+				}
+		}
+		if(p ==NULL){
+				r->next =q;
+		}
+		else{
+				r->next =p;
+		}
+}
 int main(){
 		int a[][2]={{5,0},{2,1},{8,8},{3,16}};
 		int b[][2]={{6,1},{16,6},{-8,8}};
@@ -55,7 +87,7 @@ int main(){
 		poly_show(p1);
 		poly_show(p2);
 		
-		//poly_union();
-		//poly_show();
+		poly_union(p1,p2);
+		poly_show(p1);
 		exit(0);
 }
