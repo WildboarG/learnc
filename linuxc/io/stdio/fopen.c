@@ -13,5 +13,6 @@ int main(){
 			exit(1);
 		}
 		puts("ok!");
+		fclose(fp);
 		exit(0);
 }
