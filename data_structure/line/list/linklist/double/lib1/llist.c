@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include "llist.h"
 #include <string.h>
-LLIST *llist_create(int initsize){
+LLIST *llist_create(int initsize){ //创建头节点（创建一个链表头）
 		LLIST *new;
 		new = malloc(sizeof(*new));
 		if(new ==NULL){
 				return NULL;
 		}
-		new->size=initsize;
+		new->size=initsize;   //头节点初始化
 		new->head.data=NULL;
 		new->head.prev = &new->head;
 		new->head.next =&new->head;
@@ -16,7 +16,7 @@ LLIST *llist_create(int initsize){
 }
 int llist_insert(LLIST *ptr, const void *data,int mode){
 		struct llist_node_st *newnode;
-		newnode= malloc(sizeof(*newnode));
+		newnode= malloc(sizeof(*newnode));//创建新节点用于插入
 		if(newnode==NULL){
 				return -1;
 		}
@@ -24,7 +24,9 @@ int llist_insert(LLIST *ptr, const void *data,int mode){
 		if(newnode->data==NULL){
 				return -2;
 		}
+		//拷贝数据（存放地址，数据，数据大小）
 		memcpy(newnode->data,data,ptr->size);
+
 		if(mode ==LLIST_FORWARD){
 			newnode->prev =&ptr->head;
 			newnode->next = ptr->head.next;
@@ -37,30 +39,67 @@ int llist_insert(LLIST *ptr, const void *data,int mode){
 			newnode->prev->next =newnode;
 			newnode->next->prev =newnode;
 		}
-		else {
+		else { //error
 			return -3;
 		}
 		return 0;
 }
-/*
-llist_find();
 
-llist_deleted();
+static struct llist_node_st * find_(LLIST *ptr,const void *key,llist_cmp *cmp){
+		struct llist_node_st *cur;
+		for(cur=ptr->head.next;cur!=&ptr->head;cur=cur->next){
+			if(cmp(key,cur->data)==0){
+					break;
+			}
+		}
+		return cur;
+}
+void *llist_find(LLIST *ptr,const void *key,llist_cmp *cmp){
+	  return find_(ptr,key,cmp)->data;
+}
 
-llist_fetch();
-*/
-void llist_travel(LLIST *ptr,llist_op *op){
+int llist_deleted(LLIST *ptr,const void *key,llist_cmp *cmp){
+		struct llist_node_st *node;
+		node=find_(ptr,key,cmp);
+		if(node == &ptr->head){
+				return -1;
+		}
+		node->prev->next=node->next;
+		node->next->prev=node->prev;
+		free(node->data);
+		free(node);
+		return 0;
+}
+int llist_fetch(LLIST *ptr,const void *key,llist_cmp *cmp,void *data){
+	struct llist_node_st *node;
+	node=find_(ptr,key,cmp);
+	if(node==&ptr->head){
+			return -1;
+	}
+	node->prev->next=node->next;
+	node->next->prev=node->prev;
+	if(data != NULL){
+			memcpy(data,node->data,ptr->size);
+	}
+	free(node->data);
+	free(node);
+	return 0;
+
+}
+//显示链表数据
+void llist_travel(LLIST *ptr,llist_op *op){ //通过回调函数把数据传回给用户
 	struct llist_node_st *cur;
 	for(cur=ptr->head.next;cur!=&ptr->head;cur=cur->next){
 			op(cur->data);
+
 	}
 }
 void llist_destory(LLIST *ptr){
 		struct llist_node_st *cur,*next;
 		for(cur=ptr->head.next;cur!=&ptr->head;cur=next){
 				next = cur->next;
-				free(cur->data);
+				free(cur->data); //销毁节点
 				free(cur);
 		}
-		free(ptr);
+		free(ptr);  //销毁头
 }
