@@ -214,11 +214,11 @@
             exit(1);
         }
     }
-    ```
+  ```
   
   - uct score_St data;
      struct node_st *next;
-  };
+     };
   
   int list_insert(struct node_st **list,struct socre_st *data){
       struct node_st *new;
@@ -251,9 +251,18 @@
       }
       list_show(list);
   }
+  
   ```
 
-- 
+
+
+
+
+
+
+### - 带头节点双向环链
+
+
 
 
 
