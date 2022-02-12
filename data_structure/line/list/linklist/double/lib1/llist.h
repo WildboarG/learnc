@@ -3,7 +3,7 @@
 #define LLIST_FORWARD 1  /*首部插入：插入数据到环形链表的头部之后*/
 #define LLIST_BACKWARD 2 /*尾部插入：插入数据到环形链表的头部之前*/
 
-typedef void llist_op(const void *); //函数
+typedef void llist_op(const void *); //回调函数
 
 typedef int llist_cmp(const void *,const void *);
 

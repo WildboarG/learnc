@@ -60,10 +60,10 @@ void *llist_find(LLIST *ptr,const void *key,llist_cmp *cmp){
 
 int llist_deleted(LLIST *ptr,const void *key,llist_cmp *cmp){
 		struct llist_node_st *node;
-		node=find_(ptr,key,cmp);
-		if(node == &ptr->head){
+		node=find_(ptr,key,cmp);  //如果没有查到返回的是头节点
+		if(node == &ptr->head){   //若是头节点就不能删除
 				return -1;
-		}
+		}//找到就脱链
 		node->prev->next=node->next;
 		node->next->prev=node->prev;
 		free(node->data);

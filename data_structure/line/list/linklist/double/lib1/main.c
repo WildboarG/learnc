@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "llist.h"
 
@@ -19,6 +20,11 @@ static int id_cmp(const void *key,const void *record){
 		const int *k=key;
 		const struct score_st *r=record;
 		return (*k-r->id);
+}
+static int name_cmp(const void *key,const void *record){
+		const char *k=key;
+		const struct score_st *r=record;
+		return strcmp(k,r->name);
 }
 int main(){
 		int i,ret;
@@ -49,15 +55,25 @@ int main(){
 				printf("cannot find!\n");
 
 		}
-		else{
+		else{  
+				printf("find id=%d : ",id);
 				print_s(data);
+				printf("\n");
 		}
-		int index=2;
-		ret = llist_deleted(handler,&index,id_cmp);
+
+		//int index=2;
+		//struct score_st *datab;
+		char *del_name="std6";
+		ret = llist_deleted(handler,del_name,name_cmp);
 		if(ret){
 				printf("llist_delete failed!\n");
 		}
-		llist_travel(handler,print_s);
+		
+	 	llist_travel(handler,print_s);
+
+
+
+
 		llist_destory(handler);	//销毁链表
 		exit(0);
 }
