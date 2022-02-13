@@ -62,14 +62,18 @@ int main(){
 		}
 
 		//int index=2;
-		//struct score_st *datab;
+		struct score_st *datab;
+		datab = malloc(sizeof(NAMESIZE));
 		char *del_name="std6";
-		ret = llist_deleted(handler,del_name,name_cmp);
+		ret = llist_fetch(handler,del_name,name_cmp,datab);
 		if(ret){
 				printf("llist_delete failed!\n");
 		}
 		
 	 	llist_travel(handler,print_s);
+
+		printf("\n");
+		print_s(datab);
 
 
 
