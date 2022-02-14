@@ -17,7 +17,7 @@ struct llist_node_st{  //普通节点的结构体
 typedef struct llist_head {       //头节点
 		int size;
 		struct llist_node_st head;
-		int (*insert)(struct llist_head *,const void *,int);
+		int (*insert)(struct llist_head *,const void *,int);     //以函数指针的形式将函数放入结构体中，实现类的概念
 		void *(*find)(struct llist_head *,const void *,llist_cmp *);
 		int (*deleted)(struct llist_head *,const void *,llist_cmp *);
 		int (*fetch)(struct llist_head *,const void *, llist_cmp *,void *);
@@ -25,9 +25,5 @@ typedef struct llist_head {       //头节点
 }LLIST;
 //传入用户要存放数据的长度
 LLIST *llist_create(int initsize);  //创建链表 （创建头节点）
-//插入：插入数据插入模式
-
-
-
-void llist_destory(LLIST *);   //销毁
+void llist_destory(LLIST *);   //销毁链表
 #endif

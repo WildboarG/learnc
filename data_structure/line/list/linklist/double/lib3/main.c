@@ -39,19 +39,17 @@ int main(){
 			snprintf(tmp.name,NAMESIZE,"std%d",i);
 			tmp.math=rand()%100;
 			tmp.chinese=rand()%100;
-			ret = handler->insert(handler,&tmp,LLIST_BACKWARD);
+			ret = handler->insert(handler,&tmp,LLIST_BACKWARD); // 以类的形式调用函数功能
 			if(ret){
 					exit(1);
 			}
 		}	
 		handler->travel(handler,print_s);
-#if 0
 		printf("\n");
 		
-
 		int id=3;
 		struct score_st *data;
-		data=llist_find(handler,&id,id_cmp);
+		data=handler->find(handler,&id,id_cmp);
 		if (data==NULL){
 				printf("cannot find!\n");
 
@@ -65,15 +63,13 @@ int main(){
 		//int index=2;
 		//struct score_st *datab;
 		char *del_name="std6";
-		ret = llist_deleted(handler,del_name,name_cmp);
+		ret = handler->deleted(handler,del_name,name_cmp);
 		if(ret){
 				printf("llist_delete failed!\n");
 		}
 		
-	 	llist_travel(handler,print_s);
+	 	handler->travel(handler,print_s);
 
-
-#endif
 
 		llist_destory(handler);	//销毁链表
 		exit(0);
