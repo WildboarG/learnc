@@ -3,6 +3,7 @@
 #include "llist.h"
 #include <string.h>
 
+//将数据结构隐藏到.c 文件中 ，避免用户看到
 
 struct llist_node_st{  //普通节点的结构体
 
@@ -19,7 +20,7 @@ struct llist_head_st{       //头节点
 
 
 LLIST *llist_create(int initsize){ //创建头节点（创建一个链表头）
-		struct llist_head_st *new;
+		struct llist_head_st *new;   //LLIST是我们创建的头节点类型，后续操作中将用户串过来的LLIST类型，转换成头节点类型而操作
 		new = malloc(sizeof(*new));
 		if(new ==NULL){
 				return NULL;
@@ -27,7 +28,7 @@ LLIST *llist_create(int initsize){ //创建头节点（创建一个链表头）
 		new->size=initsize;   //头节点初始化
 		new->head.prev = &new->head;
 		new->head.next =&new->head;
-		return new;
+		return new;  //头节点
 }
 int llist_insert(LLIST *p, const void *data,int mode){
 		struct llist_node_st *newnode;
