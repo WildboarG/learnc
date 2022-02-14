@@ -15,12 +15,12 @@ LLIST *llist_create(int initsize){ //创建头节点（创建一个链表头）
 }
 int llist_insert(LLIST *ptr, const void *data,int mode){
 		struct llist_node_st *newnode;
-		newnode= malloc(sizeof(*newnode) + ptr->size);//创建新节点用于插入
+		newnode= malloc(sizeof(*newnode) + ptr->size );//创建新节点用于插入 若用char[1]来占位不对齐的情况下会多占用4个字节空间 申请内存时候可以减去
 		if(newnode==NULL){
 				return -1;
 		}
 		//拷贝数据（存放地址，数据，数据大小）
-		memcpy(newnode->data,data,ptr->size);
+		memcpy(newnode->data,data,ptr->size);  //newnode->data 是数组占位符的起始位置
 
 		if(mode ==LLIST_FORWARD){
 			newnode->prev =&ptr->head;

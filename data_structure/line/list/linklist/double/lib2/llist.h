@@ -11,7 +11,8 @@ struct llist_node_st{  //普通节点的结构体
 
 		struct llist_node_st *prev;
 		struct llist_node_st *next;
-		char data[0];
+		char data[0];  //通过数组占位一个起始位置来将数据放那入结构体中 （此时数据是存放在结构体中而不是指针指向另开辟一块内存） 
+					   //实现了变长数据的数据双向环链数据类型
 };
 
 typedef struct {       //头节点
