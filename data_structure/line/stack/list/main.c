@@ -11,20 +11,22 @@ struct score_st{
 		int math;
 		int chinese;
 };
+
 void printf_s(void *record){
 		struct score_st *r =record;
 		printf("%d %s %d %d\n",r->id,r->name,r->math,r->chinese);
 }
+
 int main(){
 		int i,ret;
 		STACK *st;
 		struct score_st tmp;
-
-		st = stack_create(sizeof(struct score_st));
+		//创建链式栈，拿捏头节点
+		st = stack_create(sizeof(struct score_st)); 
 		if(st==NULL){
 				exit(1);
 		}
-		for(i=0;i<7;i++){
+		for(i=0;i<100;i++){
 			tmp.id=i;
 			snprintf(tmp.name,NAMESIZE,"std%d",i);
 			tmp.math = rand()%100;
@@ -33,6 +35,7 @@ int main(){
 				exit(1);
 				}
 		}
+		//弹栈带出的数据被回调函数printf_s 解析打印
 		while(1){
 			ret = stack_pop(st, &tmp);
 			if(ret==-1){
@@ -40,6 +43,7 @@ int main(){
 			}
 			printf_s(&tmp);
 		}
+		//弹栈销毁
 		stack_destory(st);
 		exit(0);
 }
