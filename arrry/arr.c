@@ -16,7 +16,7 @@ int main(){
 			printf("%p ----> %d\n",&arry2[i],arry2[i]);
 		printf("please give arry2 input:\n");
 		for(i=0;i<M;i++)
-				scanf("%d\n",&arry2[i]);
+				scanf("%d",&arry2[i]);
 		printf("\n");
 		printf("给数组传入后的值\n");
 		for(i=0;i<M;i++)
