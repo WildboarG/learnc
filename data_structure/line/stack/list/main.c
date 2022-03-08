@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stack.h"
+#include <stack.h>
 #define NAMESIZE 32
 
 struct score_st{
@@ -26,7 +26,7 @@ int main(){
 		if(st==NULL){
 				exit(1);
 		}
-		for(i=0;i<100;i++){
+		for(i=0;i<10;i++){
 			tmp.id=i;
 			snprintf(tmp.name,NAMESIZE,"std%d",i);
 			tmp.math = rand()%100;
